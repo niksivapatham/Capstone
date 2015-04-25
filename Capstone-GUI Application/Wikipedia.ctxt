@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=inittopic
+comment0.target=java.lang.String\ getBlurb(java.lang.String)
+comment0.text=\r\n\ This\ method\ creates\ the\ blurb\ for\ the\ location\ by\ frist\ parsing\ the\ name,\ then\ utlizing\r\n\ the\ third\ party\ package\ JSoup\ to\ parse\ through\ and\ pick\ out\ the\ first\ paragraph\ of\ the\ \r\n\ location's\ wikipedia\ page.\ It\ then\ is\ prepared\ to\ be\ outputed\ in\ the\ text\ area\r\n\r\n\ @param\ \ inittopic\ \ \ the\ location,\ in\ name,city,state\ form\r\n\ @return\ \ \ \ \ The\ fully\ formated\ string\ blurb\ ready\ to\ be\ displayed\r\n
+numComments=1

@@ -14,17 +14,23 @@ import java.awt.Container;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.awt.GridBagLayout;
+import javax.swing.JTextArea;
 
 /**
  * Holds everything for the class
  * 
  * @author Nikhil Sivapatham
- * @version 16 April 2015
+ * @version 24 April 2015
  */
 public class WindowPanel extends JPanel implements ActionListener
 {
+    //The Text box where the adress is entered
     private JTextField textBox;
+    //The Label that the map of the location is added to once the button is clicked
     JLabel map = new JLabel();
+    //The Text area where the Wiki blurb appears once the button is clicked
+    JTextArea wiki = new JTextArea();
     public WindowPanel()
     {
         createStuff();
@@ -32,31 +38,60 @@ public class WindowPanel extends JPanel implements ActionListener
 
     public void createStuff()
     {
+        //This panel uses the gridBagLayout to construct the GUI
+        //A little complicated but very useful and not too hard to get the hang of
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        //The Text entry
         textBox = new JTextField("Search a location to get started");
         Font font = new Font("Times New Roman", Font.BOLD, 12);
         textBox.setFont(font);
         textBox.setForeground(Color.GRAY);
-        textBox.setBounds(50,50,300,30);
+        c.ipadx = 200;
+        c.ipady = 10;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = .5;
+        c.weighty = .2;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        this.add(textBox, c);
 
         JButton submitButton = new JButton("Submit");
-        submitButton.setBounds(370,50,100,30);  
+        //Adds the action listener to the button. This is where the magic happens
         submitButton.addActionListener(this);
-        map.setBounds(0,100,550,1000);
+        c.ipadx = 10;
+        c.ipady = 2;
+        c.gridx ++ ;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        this.add(submitButton, c);
+
+        //Add Map and other stuff to window
+        c.gridx = 0;
+        c.gridy ++ ;
+        c.gridwidth = 2;
+        c.weighty = .3;
+        this.add(map,c);
         
-        
-        this.add(map);
-        this.add(submitButton);
-        this.add(textBox);
-        this.setLayout(null);
+        c.gridy++;
+        this.add(wiki,c);
     }
 
     public void actionPerformed(ActionEvent e) {
+        //This is where every even that processes the previously entered information takes place
+        //This gets the test and makes it a string
         String place = textBox.getText();
+        //Creates an instance of the Google Maps class I created
+        GMaps googleMap = new GMaps(place);
+        //Has a try becaue both methods open webpages, need to throw the possible exception
         try{
-            map.setIcon(GMaps.getMap());
-            this.add(map);
+            //Sets the map label to the image that is found online
+            map.setIcon(googleMap.getMap());
+            //Sets the text to the information found through the Wikipedia class I made 
+            wiki.setText(Wikipedia.getBlurb(place));
         }catch(IOException g){
             g.printStackTrace();
         }
+        
     }
 }

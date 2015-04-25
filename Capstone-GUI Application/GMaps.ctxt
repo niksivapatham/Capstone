@@ -1,4 +1,13 @@
 #BlueJ class context
-comment0.params=
-comment0.target=javax.swing.ImageIcon\ getMap()
-numComments=1
+comment0.params=initLocation
+comment0.target=GMaps(java.lang.String)
+comment1.params=
+comment1.target=javax.swing.ImageIcon\ getMap()
+comment1.text=\r\n\ This\ method\ is\ what\ actually\ reads\ the\ website\ and\ makes\ it\ an\ image\ ready\ to\ be\ added\ to\ \r\n\ the\ JPanel\r\n\r\n\ @return\ \ \ \ \ An\ ImageIcon\ that\ can\ be\ added\ to\ the\ map\ JLabel\r\n
+comment2.params=
+comment2.target=void\ parseLocation()
+comment2.text=\r\n\ This\ method\ takes\ the\ location\ in\ the\ name,city,state\ format\ and\ puts\ it\ into\r\n\ Name+city+state\ with\ underscores\ separating\ multiple\ word\ names\ or\ states\r\n\r\n
+comment3.params=
+comment3.target=java.lang.String\ returnURL()
+comment3.text=\r\n\ Returns\ the\ url\ in\ the\ correct\ version\ as\ a\ string,\ ready\ to\ be\ put\ into\ the\ browser\r\n\ @return\ \ \ \ returns\ the\ string\ form\ of\ the\ url\r\n
+numComments=4
