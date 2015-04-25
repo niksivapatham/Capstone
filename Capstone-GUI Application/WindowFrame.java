@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class WindowFrame extends JFrame
 {
+    String message = "When typing in an adress, you will want to use this format:\nName,City,State\nExample: Naperville North,Naperville,IL";
     public WindowFrame()
     {
         //Kept all of the other stuff in another method to keep it simple
@@ -66,7 +67,7 @@ public class WindowFrame extends JFrame
         //Button that creates a popup message with information
         JMenuItem hMenuItem = new JMenuItem("Information");
         hMenuItem.setToolTipText("Additional Helpful Information");
-        String message = "When typing in an adress, you will want to use this format:\nName,City,State\nExample: Naperville North,Naperville,IL";
+        
         hMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
