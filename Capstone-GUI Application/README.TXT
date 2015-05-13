@@ -11,7 +11,8 @@ too broadly defined when I started it out, but I think I have the most important
 there is an almost infinite ammount of room for growth such as adding reviews from a website such as
 Yelp, and maybe even doing something in the future such as an live twitter feed about this location.
 
-To run the program, you simply run the main method on the WindowViewer.
+To run the program, you simply run the main method on the WindowViewer. I used a library called JSoup,
+but it is in the same folder as the rest of the program so you just need to add that to BlueJ.
 There is an information drop-down method that will provide the format for typing in the adress.
 Does not fully work with a street adress, only shows the map.
 
