@@ -23,6 +23,9 @@ Statue of Liberty,New York,NY
 Golden Gate Bridge,San Francisco,CA
 Eiffel Tower,Paris,France
 
+If you type in a location like a street adress (like a house for instance) that is not famous, the map
+will still appear, but there will be no wikipedia blurb, which was handled with a try-catch block.
+
 There is some flexibility between states and countries, due to Google's flexibility, but for best results,
 within the US, use state names
 
@@ -43,7 +46,7 @@ For loops and if loops were used for tons of things because this is programming
 
 Static methods were utilized in Objects that didn't really need classes built for their usage
 
-Catching and throwing excpetions were used, albeit sparsely when using online content 
+Catching and throwing excpetions were used when acessing/processing online content 
 
 I also had to learn some new things and do research for my project and to learn more about programming in
 general:

@@ -3,6 +3,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.jsoup.nodes.Element;
+import org.jsoup.HttpStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -32,6 +33,7 @@ public class Wikipedia
         List<String> locationsParts = Arrays.asList(topic.split(","));
         List<String> nameParts = Arrays.asList((locationsParts.get(0)).split(" "));
         String name = "";
+        String finalMessage = "";
         for (int i = 0; i<nameParts.size();i++)
         {
             if (i == nameParts.size()-1)
@@ -43,40 +45,40 @@ public class Wikipedia
                 name += nameParts.get(i)+"_";
             }
         }
-        
-        //This is jjust JSoup working its magic, but very simple
-        String baseURL = "http://en.wikipedia.org/wiki/";
-        String url = baseURL+name;
-        Document doc = Jsoup.connect(url).get();
-        Elements paragraphs = doc.select(".mw-content-ltr p");
-        Element firstParagraph = paragraphs.first();
-        
-        //Takes the text and puts it into a one line string
-        String message = firstParagraph.text();
-        //What will be the returned message
-        String finalMessage = "\nWiki Blurb:\n\n";
-        //Counts the character the for loop is on
-        int textCount = 0;
-        //Counts the last time the for loop separated the string
-        int textInitCount = 0;
-        
-        //This for loop iterates through the string and every 70 character adds a substing of the 
-        //preceding character to the finalMessage string as well as a \n so that it is properly 
-        //formatted
-        for (int i = 0; i < message.length(); i++){
-            textCount ++;
-            if (textCount%70 ==0 )
-            {
-                finalMessage += message.substring(textInitCount,textCount)+"\n";   
-                textInitCount = textCount;            
-            } else if ((message.length()-textCount)<70)
-            {
-                break;
+
+        try{
+            //This is jjust JSoup working its magic, but very simple
+            String baseURL = "http://en.wikipedia.org/wiki/";
+            String url = baseURL+name;
+            Document doc = Jsoup.connect(url).get();
+            Elements paragraphs = doc.select(".mw-content-ltr p");
+            Element firstParagraph = paragraphs.first();
+
+            //Takes the text and puts it into a one line string
+            String message = firstParagraph.text();
+            //What will be the returned message
+            finalMessage += "\nWiki Blurb:\n\n";
+            //Counts the character the for loop is on
+            int textCount = 0;
+
+            //This for loop iterates through the string and every 70 character adds a substing of the 
+            //preceding character to the finalMessage string as well as a \n so that it is properly 
+            //formatted
+            for (int i = 0; i < message.length(); i++){
+                if ((i-textCount)>=60 && message.substring(i,i+1).equals(" ") )
+                {
+                    finalMessage += message.substring(textCount,i)+"\n";   
+                    textCount = i;
+                } else if ((message.length()-textCount)<70)
+                {
+                    break;
+                }
             }
+            //Should print out the rest of the message, might not be working
+            finalMessage += message.substring(textCount,message.length());
+        } catch (HttpStatusException e){
+            finalMessage += "No information can be acessed on this location";
         }
-        //Should print out the rest of the message, might not be working
-        finalMessage += message.substring(textCount,message.length());
-        
         return finalMessage;        
     }
 }
